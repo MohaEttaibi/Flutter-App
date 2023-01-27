@@ -1,5 +1,3 @@
-*
-!README.md
 # Miscellaneous
 *.class
 *.log
@@ -38,6 +36,15 @@ migrate_working_dir/
 /macos/
 /linux/
 /ios/
+/android/
+/images/
+/lib/
+/test/
+.gitignore
+.metadata
+analysis_options.yaml
+flutter_01.png
+pubspec.*
 
 # Symbolication related
 app.*.symbols
