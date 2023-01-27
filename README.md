@@ -1,6 +1,6 @@
 # Flutter App
+## The Complete 2023 Flutter Development Bootcamp with Dart
 
-A new Flutter project.
+# Day 1 
+(https://github.com/MohaEttaibi/Flutter-App/tree/Day_1)
 
-# Preview
-![Preview](https://github.com/MohaEttaibi/Flutter-App/blob/master/flutter_01.png)
