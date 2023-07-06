@@ -1,136 +1,77 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  return runApp(
+    MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.teal,
-        body: SafeArea(
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 50.0,
-                backgroundImage: AssetImage('images/mi.jpg'),
-              ),
-              Text(
-                "Mohamed Ettayby",
-                style: TextStyle(
-                  fontFamily: 'Pacifico',
-                  fontSize: 25.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Web & Mobile Developer'.toUpperCase(),
-                style: TextStyle(
-                  fontFamily: 'Source Sans Pro',
-                  color: Colors.white,
-                  // fontSize: 16.0,
-                  letterSpacing: 1.3,
-                ),
-              ),
-
-              SizedBox(
-                height: 20.0,
-                width: 150.0,
-                child: Divider(
-                  color: Colors.teal.shade100,
-                ),
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.phone,
-                    color: Colors.teal,
-                  ),
-                  title: Text(
-                    '+212 639 139 659',
-                    style: TextStyle(
-                      color: Colors.teal.shade900,
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 13.0,
-                    ),
-                  ),
-                ),
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.email,
-                    color: Colors.teal,
-                  ),
-                  title: Text(
-                    'mohammed.ettayby@gmail.com',
-                    style: TextStyle(
-                      color: Colors.teal.shade900,
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 13.0,
-                    ),
-                  ),
-                ),
-              ),
-              // Container(
-              //   color: Colors.white,
-              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              //   padding: EdgeInsets.all(10.0),
-              //   child: Row(
-              //     children: [
-              //       Icon(
-              //         Icons.phone,
-              //         color: Colors.teal,
-              //       ),
-              //       SizedBox(
-              //         width: 10.0,
-              //       ),
-              //       Text(
-              //         '+212 639 139 659',
-              //         style: TextStyle(
-              //           color: Colors.teal.shade900,
-              //           fontFamily: 'Source Sans Pro',
-              //           fontSize: 20.0,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // Container(
-              //   color: Colors.white,
-              //   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              //   padding: EdgeInsets.all(10.0),
-              //   child: Row(
-              //     children: [
-              //       Icon(
-              //         Icons.email,
-              //         color: Colors.teal,
-              //       ),
-              //       SizedBox(
-              //         width: 10.0,
-              //       ),
-              //       Text(
-              //         'mohammed.ettayby@gmail.com',
-              //         style: TextStyle(
-              //           color: Colors.teal.shade900,
-              //           fontFamily: 'Source Sans Pro',
-              //           fontSize: 13.0,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-            ],
-          ),
+        backgroundColor: Colors.red,
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Dicee'),
+          backgroundColor: Colors.red,
         ),
+        body: DicePage(),
+      ),
+    ),
+  );
+}
+
+// ignore: use_key_in_widget_constructors
+class DicePage extends StatefulWidget {
+  @override
+  State<DicePage> createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  int leftDiceNumber = 1;
+  int rightDiceNumber = 3;
+
+  void changeDiceFace() {
+    setState(() {
+      leftDiceNumber = Random().nextInt(6) + 1;
+      rightDiceNumber = Random().nextInt(6) + 1;
+    });
+  }
+
+  final ButtonStyle flatButton = TextButton.styleFrom(
+      foregroundColor: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 0.0),
+      backgroundColor: Colors.transparent);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextButton(
+                style: flatButton,
+                onPressed: () {
+                  changeDiceFace();
+                },
+                child: Image.asset('images/dice$leftDiceNumber.png'),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextButton(
+                style: flatButton,
+                onPressed: () {
+                  setState(() {
+                    changeDiceFace();
+                  });
+                },
+                child: Image.asset('images/dice$rightDiceNumber.png'),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
